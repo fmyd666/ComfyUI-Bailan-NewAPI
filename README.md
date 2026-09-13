@@ -1,34 +1,26 @@
 # ComfyUI-Bailan-NewAPI
 
-摆烂 New-API 图片/视频节点。地址写死 `https://newapi.bailan.store`，填 New 的 Key 即可。
+摆烂 New-API 图片/视频节点。地址默认 `https://newapi.bailan.store`。
 
 ## 安装
 
-便携版：
-
 ```text
 cd ComfyUI\custom_nodes
+rmdir /s /q ComfyUI-Bailan-NewAPI
 git clone https://github.com/fmyd666/ComfyUI-Bailan-NewAPI.git
 ```
 
-重启 ComfyUI。右键搜索：`摆烂` 或 `Bailan`。
+完全关掉 ComfyUI 再打开。搜索 **摆烂** 或 **Bailan**，不要只搜 `bai`。
 
 ## 节点
 
-- **摆烂 New 配置**：只填 Key（可选）
-- **摆烂 生图**：Seedream，接口 `/v1/images/generations`
-- **摆烂 生视频**：Seedance，接口 `/v1/video/generations`
+1. **摆烂 New 图/视频**
+   - Key、模式图片/视频、模型、分辨率、时长/数量、提示词、负提示词
+   - 可选 `image`：图模式=参考改图；视频模式=首帧/参考图
+   - 输出：预览图、视频路径、日志
+2. **摆烂 保存视频**
+   - 把上面的视频路径连进来，另存一份到 `output/bailan_newapi/`
+3. **摆烂 刷新模型**
+   - 用 Key 调 `GET /v1/models`，写入本地缓存，日志里列出 seedream/seedance
 
-## 填法
-
-| 项 | 值 |
-|---|---|
-| 地址 | 默认 `https://newapi.bailan.store`，不要改 |
-| Key | New 后台开的令牌，不要用 Sub2API |
-| 生图模型 | `doubao-seedream-5-0-260128` |
-| 视频 720P | `doubao-seedance-2-0-260128` |
-| 视频 480P | 分辨率选 480p，插件会自动换模型名 |
-| 视频 1080P | 分辨率选 1080p |
-| 时长 | 4–15 秒，费用 = 标价 × 秒 × 分组 |
-
-负提示词会发出去；Seedream 上游可能忽略。日志里 Key 会打码。
+视频 480p/720p/1080p 会自动换模型名。Key 用 New 的令牌。
